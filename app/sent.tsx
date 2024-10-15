@@ -1,5 +1,6 @@
 import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+
 export default function SentScreen() {
   return (
     <SafeAreaView style={{ flex: 1, alignItems: "center" }}>
@@ -10,7 +11,7 @@ export default function SentScreen() {
       <TouchableOpacity
         style={{
           marginTop: "80%",
-          backgroundColor: "grey",
+          backgroundColor: "black",
           padding: 14,
           borderRadius: 20,
           alignItems: "center",

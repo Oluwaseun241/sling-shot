@@ -22,7 +22,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import SentScreen from "./sent";
-import { BlurView } from "@react-native-community/blur";
+import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
 
 export default function HomeScreen() {
@@ -77,56 +77,68 @@ export default function HomeScreen() {
     };
   });
 
+  // TODO Bezier curve
   return (
-    <Animated.View style={{ flex: 1, backgroundColor: "#525354" }}>
-      {!sent ? (
-        <SafeAreaView>
-          <Animated.View style={[styles.header, gradientStyle]}>
-            <Ionicons name="person-circle" size={54} color="white" />
-          </Animated.View>
-          <PanGestureHandler onGestureEvent={panGesture}>
-            <Animated.View style={[styles.body, rstyle]}>
-              <Text
-                style={{ fontSize: 30, fontWeight: "bold", color: "white" }}
-              >
-                $4.50
-              </Text>
-              <Text
-                style={{
-                  color: "white",
-                  marginTop: "10%",
-                  fontSize: 24,
-                  fontWeight: "600",
-                  letterSpacing: 8,
-                }}
-              >
-                {text}
-              </Text>
-            </Animated.View>
-          </PanGestureHandler>
-          {!button ? (
-            <Animated.View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginHorizontal: "10%",
-                marginTop: "80%",
-              }}
-            >
-              <TouchableOpacity style={styles.button}>
-                <Entypo name="edit" size={24} color="white" />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.button}>
-                <MaterialIcons name="cancel" size={24} color="white" />
-              </TouchableOpacity>
-            </Animated.View>
+    <Animated.View style={{ flex: 1, backgroundColor: "orange" }}>
+      <BlurView
+        intensity={50}
+        tint="dark"
+        style={{ flex: 1, width: "100%", height: "100%" }}
+      >
+        <LinearGradient
+          colors={["rgba(0,0,0,0.8)", "transparent"]}
+          style={{ flex: 1 }}
+        >
+          {!sent ? (
+            <SafeAreaView>
+              <Animated.View style={[styles.header, gradientStyle]}>
+                <Ionicons name="person-circle" size={54} color="white" />
+              </Animated.View>
+              <PanGestureHandler onGestureEvent={panGesture}>
+                <Animated.View style={[styles.body, rstyle]}>
+                  <Text
+                    style={{ fontSize: 30, fontWeight: "bold", color: "white" }}
+                  >
+                    $4.50
+                  </Text>
+                  <Text
+                    style={{
+                      color: "white",
+                      marginTop: "10%",
+                      fontSize: 24,
+                      fontWeight: "600",
+                      letterSpacing: 8,
+                    }}
+                  >
+                    {text}
+                  </Text>
+                </Animated.View>
+              </PanGestureHandler>
+              {!button ? (
+                <Animated.View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    marginHorizontal: "10%",
+                    marginTop: "80%",
+                  }}
+                >
+                  <TouchableOpacity style={styles.button}>
+                    <Entypo name="edit" size={24} color="white" />
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.button}>
+                    <MaterialIcons name="cancel" size={24} color="white" />
+                  </TouchableOpacity>
+                </Animated.View>
+              ) : (
+                <View />
+              )}
+            </SafeAreaView>
           ) : (
-            <View />
+            <SentScreen />
           )}
-        </SafeAreaView>
-      ) : (
-        <SentScreen />
-      )}
+        </LinearGradient>
+      </BlurView>
     </Animated.View>
   );
 }
@@ -141,7 +153,7 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 15,
-    borderRadius: 25,
-    backgroundColor: "grey",
+    borderRadius: 30,
+    backgroundColor: "black",
   },
 });
